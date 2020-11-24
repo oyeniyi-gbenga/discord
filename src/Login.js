@@ -11,9 +11,9 @@ function Login() {
         <div className='login' >
             <h1>Sign Up</h1>
             <div className="login__logo">
-                <img src="https://upload.wikimedia.org/wikipedia/sco/thumb/9/98/Discord_logo.svg/800px-Discord_logo.svg.png" alt="Discord"/>
+                <img src="https://www.signupsoftware.com/assets/signup-logotype-web-2.jpg" alt="Sign Up"/>
             </div>
-            <Button onClick={signIn}>Sign In</Button>
+            <Button onClick={signIn}>Sign Up</Button>
         </div>
     )
 }

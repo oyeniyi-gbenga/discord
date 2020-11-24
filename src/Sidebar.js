@@ -1,8 +1,8 @@
 import React, { useState, useEffect} from 'react';
 import './Sidebar.css';
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+// import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AddIcon from "@material-ui/icons/Add";
-import SidebarChannel from './SidebarChannel';
+import SidebarProject from './SidebarProject';
 import SignalCellularAltIcon from '@material-ui/icons/SignalCellularAlt';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import  CallIcon from '@material-ui/icons/Call';
@@ -17,23 +17,23 @@ import db, { auth } from './firebase';
 
 function Sidebar() {
     const user = useSelector(selectUser);
-    const [channels, setChannels] = useState([]);
+    const [projects, setProjects] = useState([]);
 
 
 useEffect(() => {
-   db.collection('channels').onSnapshot(snapshot => (
-       setChannels(snapshot.docs.map(doc => ({
+   db.collection('projects').onSnapshot(snapshot => (
+       setProjects(snapshot.docs.map(doc => ({
            id: doc.id,
-           channel: doc.data(),
+           project: doc.data(),
        })))
    ))
 }, [])
 
-const handleAddChannel = () => {
-    const channelName = prompt('Enter a new channel name');
-    if (channelName) {
-        db.collection('channels').add({
-            channelName: channelName,
+const handleAddProject = () => {
+    const projectName = prompt('Enter a new project name');
+    if (projectName) {
+        db.collection('projects').add({
+            projectName: projectName,
         })
     }
 }
@@ -41,22 +41,22 @@ const handleAddChannel = () => {
     return (
         <div className='sidebar'>
             <div className="sidebar__top">
-                <h3>Ambivert Code</h3>
-                <ExpandMoreIcon/>
+                <h3>Ambivertcode</h3>
+                
             </div>
 
-            <div className="sidebar__channels">
-                <div className="sidebar__channelsHeader">
+            <div className="sidebar__Projects">
+                <div className="sidebar__ProjectsHeader">
                     <div className="sidebar__header">
-                        <ExpandMoreIcon/>
-                        <h4>Text Channels</h4>
+                    <AddIcon onClick={handleAddProject} className='sidebar__addProject' /> 
+                        <h4>Text Projects</h4>
                     </div>
-                    <AddIcon onClick={handleAddChannel} className='sidebar__addChannel' />
+                    
                 </div>
             
-                    <div className="sidebar__channelsList">
-                    {channels.map(({id, channel}) => (
-                        <SidebarChannel key={id} id={id} channelName={channel.channelName} />
+                    <div className="sidebar__ProjectsList">
+                    {projects.map(({id, project}) => (
+                        <SidebarProject key={id} id={id} projectName={project.projectName} />
                     ))}
                        
                         

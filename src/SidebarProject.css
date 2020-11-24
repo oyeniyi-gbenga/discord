@@ -1,9 +1,9 @@
-.sidebarChannel:hover > h4 {
+.sidebarProject:hover > h4 {
   color: #fff;
   background-color: #40464b;
 }
 
-.sidebarChannel > h4 {
+.sidebarProject > h4 {
   display: flex;
   padding-left: 15px;
   align-items: center;
@@ -12,7 +12,7 @@
   cursor: pointer;
 }
 
-.sidebarChannel__hash {
+.sidebarProject__hash {
   font-size: 30px;
   padding: 8px;
 }

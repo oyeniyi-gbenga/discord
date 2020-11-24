@@ -16,19 +16,19 @@
   border: 3px solid #26282c;
 }
 
-.sidebar__channels {
+.sidebar__projects {
   flex: 1;
 }
 
-.sidebar__addChannel {
+.sidebar__addProject {
   cursor: pointer;
 }
 
-.sidebar__addChannel:hover {
+.sidebar__addProject:hover {
   color: #fff;
 }
 
-.sidebar__channelsHeader {
+.sidebar__projectsHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -39,7 +39,9 @@
 
 .sidebar__header {
   display: flex;
+  justify-content: space-evenly;
   align-items: center;
+  padding-right: 10px;
 }
 
 .sidebar__voice,

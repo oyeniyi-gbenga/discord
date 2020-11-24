@@ -8,29 +8,29 @@ import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 import Message from './Message';
 import { useSelector } from 'react-redux';
 import { selectUser } from './features/userSlice';
-import { selectChannelId, selectChannelName } from './features/appSlice';
+import { selectProjectId, selectProjectName } from './features/appSlice';
 import db from './firebase';
 import firebase from 'firebase';
 
 
 function Chat() {
     const user = useSelector(selectUser);
-    const channelId = useSelector(selectChannelId);
-    const channelName = useSelector(selectChannelName);
+    const projectId = useSelector(selectProjectId);
+    const projectName = useSelector(selectProjectName);
     const [input, setInput] = useState('');
     const [messages, setMessages] = useState([]);
 
     useEffect(() => {
-        if(channelId) {
-            db.collection('channels').doc(channelId).collection('messages').orderBy('timestamp', 'desc')
+        if(projectId) {
+            db.collection('projects').doc(projectId).collection('messages').orderBy('timestamp', 'desc')
             .onSnapshot((snapshot) => setMessages(snapshot.docs.map((doc) =>doc.data())));
         }       
-    }, [channelId])
+    }, [projectId])
     
     const sendMessage = e => {
         e.preventDefault();
 
-        db.collection('channels').doc(channelId).collection('messages').add({
+        db.collection('projects').doc(projectId).collection('messages').add({
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             message: input,
             user: user,
@@ -40,7 +40,7 @@ function Chat() {
 
     return (
         <div className='chat'>
-            <ChatHeader channelName={channelName}/>
+            <ChatHeader projectName={projectName}/>
             <div className="chat__messages">
             {messages.map((message) => (
                 <Message
@@ -56,10 +56,10 @@ function Chat() {
                 <form
                 >
                     <input value={input}
-                     disabled={!channelId}
-                     onChange={e => setInput(e.target.value)} placeholder={`Message #${channelName}`} />
+                     disabled={!projectId}
+                     onChange={e => setInput(e.target.value)} placeholder={`Message #${projectName}`} />
                     <button 
-                    disabled={!channelId}
+                    disabled={!projectId}
                     className="chat__inputButton" type='submit'
                     onClick={sendMessage}
                     >Send Message</button>
